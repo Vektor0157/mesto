@@ -1,0 +1,8 @@
+.elements__item{
+	margin: 0 auto;
+	width: 282px;
+	border-radius: 10px;
+	background-color: #fff;
+	color: #000;
+	position: relative;
+}
