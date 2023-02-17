@@ -25,6 +25,7 @@
 		margin-top: 36px;
 		max-width: 282px;
 		width: 100%;
+		margin-left: 0;
 		background-image: url(../../../images/plus-phone.svg);
 	}
 }
