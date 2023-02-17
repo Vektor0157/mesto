@@ -8,13 +8,13 @@ let profileName = document.querySelector('.profile__name');
 let profileDescription = document.querySelector('.profile__description');
 
 function openPopup(){
-	popup.classList.add('popup_open');
+	popup.classList.add('popup_opened');
 	userInputName.value = profileName.textContent;
 	userInputInfo.value = profileDescription.textContent;
 }
 
 function closePopup(){
-	popup.classList.remove('popup_open');
+	popup.classList.remove('popup_opened');
 }
 
 function savePopup(evt){
@@ -24,10 +24,7 @@ function savePopup(evt){
 	closePopup();
 }
 
-if (popup.classList.contains('popup_open') === false) {
-	popupOpenBtn.addEventListener('click', openPopup);
-}
-
+popupOpenBtn.addEventListener("click", openPopup);
 
 popupCloseBtn.addEventListener('click', closePopup);
 

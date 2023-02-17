@@ -5,17 +5,21 @@
 	padding: 0;
 	cursor: pointer;
 	border: 1px solid #fff;
+	background-image: url(../../../images/edit.svg);
 	background-position: center;
+	background-repeat: no-repeat;
 	background-color: #000;
 	transition: opacity 0.5s ease-in-out;
 }
 .profile__btn:hover{
 	opacity: 0.6;
 }
+
 @media screen and (max-width: 767px){
 	.profile__btn{
 		width: 18px;
 		height: 18px;
 		margin: 0 0 10px 10px;
+		background-image: url(../../../images/edit-phone.svg);
 	}
 }
