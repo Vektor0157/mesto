@@ -18,17 +18,18 @@ const closePopup = (popup) => {
 	popup.classList.remove('popup_opened');
 };
 
+const closeButtons = document.querySelectorAll('.popup__close');
+
+closeButtons.forEach((button) => { 
+	const popup = button.closest('.popup');
+	button.addEventListener('click', () => closePopup(popup));
+});
+
+
 const openPopupProfile = () => {
 	userInputName.value = profileName.textContent;
 	userInputInfo.value = profileDescription.textContent;
 	openPopup(popupProfile);
-}
-
-function savePopupProfile(evt){
-	evt.preventDefault();
-	profileName.textContent = userInputName.value;
-	profileDescription.textContent = userInputInfo.value;
-	closePopupProfile(popupCloseProfile, popupContainerProfile);
 }
 
 const closePopupProfile = (evt) => {
@@ -36,10 +37,15 @@ const closePopupProfile = (evt) => {
 	closePopup(popupProfile);
 };
 
+function savePopupProfile(evt){
+	evt.preventDefault();
+	profileName.textContent = userInputName.value;
+	profileDescription.textContent = userInputInfo.value;
+	closePopup(evt);
+}
+
 popupOpenBtn.addEventListener('click', openPopupProfile);
-popupCloseProfile.addEventListener('click', closePopupProfile);
 popupFormProfile.addEventListener('submit', savePopupProfile);
-popupContainerProfile.addEventListener('click', closePopupProfile)
 
 //Add-card
 const popupAddCard = document.querySelector('.popup_type_add-card');
@@ -67,12 +73,10 @@ function savePopupAddCard(evt){
 	elementCard.prepend(getItem({name: popupInputTitle.value, link: popupInputLink.value}));
 	popupInputTitle.value = '';
 	popupInputLink.value = '';
-	closePopupAddCard(popupCloseAddCard);
+	closePopup(evt);
 }
 
 popupOpenAddBtn.addEventListener('click', openPopupAddCard);
-popupCloseAddCard.addEventListener('click', closePopupAddCard);
-popupContainerAddCard.addEventListener('click', closePopupAddCard);
 popupFormAddCard.addEventListener('submit', savePopupAddCard);
 
 //Photo
@@ -87,7 +91,7 @@ const elementTemplate = document.querySelector('.template');
 const openPopupPhoto = (evt) => {
 	const targetElement = evt.target;
 	const targetPhoto = targetElement.closest('.element__photo');
-	const targetTitle = targetElement.nextElementSibling;
+	const targetTitle = targetElement.closest('.element').querySelector('.element__title');
 	popupImage.src = targetPhoto.src;
 	popupImage.alt = targetPhoto.alt;
 	popupName.textContent = targetTitle.textContent;
@@ -148,7 +152,6 @@ function getItem(item){
 	elemPhoto.src = item.link;
 	elemPhoto.alt = item.name;
 	elemPhoto.addEventListener('click', openPopupPhoto);
-	popupClosePhoto.addEventListener('click', closePopupPhoto);
 	const elemDelete = newItem.querySelector('.element__delete');
 	elemDelete.addEventListener('click', elemDeleting);
 	const elemLike = newItem.querySelector('.element__like');
