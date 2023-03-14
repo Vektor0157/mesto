@@ -1,7 +1,7 @@
 const popup = document.querySelector('.popup');
 //Profile
 const popupOpenBtn = document.querySelector('.profile__btn');
-const popupProfile = document.querySelector('.popup__profile');
+const popupProfile = document.querySelector('.popup_type_profile');
 const popupContainerProfile = document.querySelector('.popup__container_profile');
 const popupCloseProfile = document.querySelector('.popup__close_profile');
 const userInputName = document.querySelector('.popup__input_item_name');
@@ -42,7 +42,7 @@ popupFormProfile.addEventListener('submit', savePopupProfile);
 popupContainerProfile.addEventListener('click', closePopupProfile)
 
 //Add-card
-const popupAddCard = document.querySelector('.popup__add-card');
+const popupAddCard = document.querySelector('.popup_type_add-card');
 const popupContainerAddCard = document.querySelector('.popup__container_add-card');
 const popupCloseAddCard = document.querySelector('.popup__close_add-card');
 const popupOpenAddBtn = document.querySelector('.profile__add-btn');
@@ -76,7 +76,7 @@ popupContainerAddCard.addEventListener('click', closePopupAddCard);
 popupFormAddCard.addEventListener('submit', savePopupAddCard);
 
 //Photo
-const popupPhoto = document.querySelector('.popup__photo');
+const popupPhoto = document.querySelector('.popup_type_photo');
 const popupOpenPhoto = document.querySelector('.element__photo');
 const popupClosePhoto = document.querySelector('.popup__close_photo');
 const popupImage = document.querySelector('.popup__image');
