@@ -41,7 +41,7 @@ function savePopupProfile(evt){
 	evt.preventDefault();
 	profileName.textContent = userInputName.value;
 	profileDescription.textContent = userInputInfo.value;
-	closePopup(evt);
+	closePopup(popupProfile);
 }
 
 popupOpenBtn.addEventListener('click', openPopupProfile);
@@ -73,7 +73,7 @@ function savePopupAddCard(evt){
 	elementCard.prepend(getItem({name: popupInputTitle.value, link: popupInputLink.value}));
 	popupInputTitle.value = '';
 	popupInputLink.value = '';
-	closePopup(evt);
+	closePopup(popupAddCard);
 }
 
 popupOpenAddBtn.addEventListener('click', openPopupAddCard);
