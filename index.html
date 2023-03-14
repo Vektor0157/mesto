@@ -22,66 +22,49 @@
 				<button class="profile__add-btn" type="button"></button>
 			</section>
 			<section class="elements">
-				<ul class="elements__list">
-					<li class="elements__item">
-						<img class="elements__image"
-						alt="Древний город Петра"
-						src="images/elements__image/Al-Khazneh.jpg">
-						<div class="elements__info">
-							<h2 class="elements__title">Древний город Петра</h2>
-							<button class="elements__like" type="button" title="Лайк"><img src="images/like.svg" alt="Кнопка лайка"></button>
+				<template class="template">
+					<div class="element">
+						<img src="#" alt="#" class="element__photo">
+						<div class="element__container">
+							<h2 class="element__title"></h2>
+							<button class="element__like" aria-label="Кнопка-Лайк" type="button"></button>
 						</div>
-					</li>
-					<li class="elements__item">
-						<img class="elements__image" alt="Храмы Ангкора" src="images/elements__image/Angkor-Wat-Temple.jpg">
-						<div class="elements__info">
-							<h2 class="elements__title">Храмы Ангкора</h2>
-							<button class="elements__like" type="button" title="Лайк"><img src="images/like.svg" alt="Кнопка лайка"></button>
-						</div>
-					</li>
-					<li class="elements__item">
-						<img class="elements__image" alt="Озеро Байкал" src="images/elements__image/Lake-Baikal.jpg">
-						<div class="elements__info">
-							<h2 class="elements__title">Озеро Байкал</h2>
-							<button class="elements__like" type="button" title="Лайк"><img src="images/like.svg" alt="Кнопка лайка"></button>
-						</div>
-					</li>
-					<li class="elements__item">
-						<img class="elements__image" alt="Рисовые террасы Му Кан Чай" src="images/elements__image/Mu-Cang-Chai-2.jpg">
-						<div class="elements__info">
-							<h2 class="elements__title">Рисовые террасы Му Кан Чай</h2>
-							<button class="elements__like" type="button" title="Лайк"><img src="images/like.svg" alt="Кнопка лайка"></button>
-						</div>
-					</li>
-					<li class="elements__item">
-						<img class="elements__image" alt="Скала Язык Тролля" src="images/elements__image/Trolltunga-Rock.jpg">
-						<div class="elements__info">
-							<h2 class="elements__title">Скала Язык Тролля</h2>
-							<button class="elements__like" type="button" title="Лайк"><img src="images/like.svg" alt="Кнопка-лайка"></button>
-						</div>
-					</li>
-					<li class="elements__item">
-						<img class="elements__image" alt="Национальный парк Йеллоустон" src="images/elements__image/Yellowstone-National-Park.jpg">
-						<div class="elements__info">
-							<h2 class="elements__title">Национальный парк Йеллоустон</h2>
-							<button class="elements__like" type="button" title="Лайк"><img src="images/like.svg" alt="Кнопка лайка"></button>
-						</div>
-					</li>
-				</ul>
+						<button class="element__delete" type="button"></button>
+				</template>
 			</section>
 		</main>
 		<footer class="footer">
 			<p class="footer__copyright">&copy; 2023 Mesto Russia</p>
 		</footer>
-		<div class="popup">
-			<div class="popup__container">
-				<h2 class="popup__title">Редактировать профиль</h2>
-				<form class="popup__form" name="popupForm">
-					<input type="text" name="name" class="popup__input popup__input_item_name" placeholder="Введите ваше имя">
-					<input type="text" name="info" class="popup__input popup__input_item_info" placeholder="Расскажите о себе">
+		<div class="popup popup__profile">
+			<div class="popup__container popup__container_profile">
+				<form class="popup__form popup__form_profile" name="popup-form-profile">
+					<button type="button" class="popup__close popup__close_profile" aria-label="close"></button>
+					<h2 class="popup__title">Редактировать профиль</h2>
+					<input type="text" name="name" class="popup__input popup__input_item_name" value="" placeholder="Введите ваше имя">
+					<input type="text" name="info" class="popup__input popup__input_item_info" value="" placeholder="Расскажите о себе">
 					<button type="submit" class="popup__submit-btn">Сохранить</button>
 				</form>
-				<button type="button" class="popup__close-icon" aria-label="close"></button>
+			</div>
+		</div>
+		<div class="popup popup__add-card">
+			<div class="popup__container popup__container_add-card">
+				<form class="popup__form popup__form_add-card" name="popupForm">
+					<button type="button" class="popup__close popup__close_add-card" aria-label="close"></button>
+					<h2 class="popup__title">Новое место</h2>
+					<input type="text" name="title" class="popup__input popup__input_item_title" value="" placeholder="Название">
+					<input type="text" name="link" class="popup__input popup__input_item_link" value="" placeholder="Ссылка на картинку">
+					<button type="submit" class="popup__submit-btn">Создать</button>
+				</form>
+			</div>
+		</div>
+		<div class="popup popup__photo">
+			<div class="popup__container popup__container_photo">
+				<form class="popup__photo-card">
+					<button class="popup__close popup__close_photo" aria-label="Закрыть фотографию"></button>
+					<img src="#" alt="фотография" class="popup__image">
+					<h2 class="popup__name"></h2>
+				</form>
 			</div>
 		</div>
 		<script src="./scripts/index.js"></script>
