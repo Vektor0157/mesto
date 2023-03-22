@@ -1,8 +1,6 @@
 .popup__input{
 	width: 355px;
 	height: 27px;
-	margin: 0 0 30px;
-	padding: 0;
 	font-weight: 400;
 	font-size: 14px;
 	line-height: 17px;
@@ -10,8 +8,11 @@
 	outline:none;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
-.popup__input:nth-child(4){
+.popup__input:nth-child(1){
 	margin: 0;
+}
+.popup__input:invalid{
+	border-bottom: 1px solid rgba(255, 0, 0, 1);
 }
 @media screen and (max-width: 767px){
 	.popup__input{

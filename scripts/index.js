@@ -12,11 +12,20 @@ const profileDescription = document.querySelector('.profile__description');
 
 const openPopup = (popup) => {
 	popup.classList.add('popup_opened');
+	document.addEventListener('keydown', closeByEscape);
 }
 
 const closePopup = (popup) => {
 	popup.classList.remove('popup_opened');
+	document.removeEventListener('keydown', closeByEscape);
 };
+
+const closeByEscape = (evt) => {
+	if (evt.key === 'Escape') {
+		const openedPopup = document.querySelector('.popup_opened')
+		closePopup(openedPopup);
+	}
+}
 
 const closeButtons = document.querySelectorAll('.popup__close');
 
@@ -45,6 +54,7 @@ function savePopupProfile(evt){
 }
 
 popupOpenBtn.addEventListener('click', openPopupProfile);
+popupContainerProfile.addEventListener('click', closePopupProfile)
 popupFormProfile.addEventListener('submit', savePopupProfile);
 
 //Add-card
@@ -77,6 +87,7 @@ function savePopupAddCard(evt){
 }
 
 popupOpenAddBtn.addEventListener('click', openPopupAddCard);
+popupContainerAddCard.addEventListener('click', closePopupAddCard)
 popupFormAddCard.addEventListener('submit', savePopupAddCard);
 
 //Photo
