@@ -3,21 +3,21 @@
 	max-width: 356px;
 	display: flex;
 	flex-direction: column;
-	margin: 30px auto 0;
+	margin: 30px 36px 0;
 }
 .popup__block-input:first-of-type{
-	margin: 0 auto;
+	margin: 0 36px;
 }
 @media screen and (max-width: 767px){
 	.popup__block-input{
 		max-width: 238px;
-		margin: 0 22px 30px;
-		padding-bottom: 13px;
+		margin: 0 auto 30px;
 	}
 	.popup__block-input:first-of-type{
-		margin: 0 0 30px;
+		padding: 0;
+		margin: 0 22px 30px;
 	}
 	.popup__block-input:last-of-type{
-		margin: 0;
+		margin: 0 auto;
 	}
 }

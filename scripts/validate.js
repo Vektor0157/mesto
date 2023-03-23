@@ -1,21 +1,21 @@
-const showInputError = (inputElement, errorMessage, inputErrorClass, errorClass) => {
-	const errorElement = inputElement.closest('.popup__block-input').querySelector(inputErrorClass);
+const showInputError = (inputElement, errorMessage, inputErrorClass, errorClass, blockInputSelector) => {
+	const errorElement = inputElement.closest(blockInputSelector).querySelector(inputErrorClass);
 	errorElement.textContent = errorMessage;
 	errorElement.classList.toggle(errorClass, true); };
 
-const hideInputError = (inputElement, inputErrorClass, errorClass) => {
-	const errorElement = inputElement.closest('.popup__block-input').querySelector(inputErrorClass);
+const hideInputError = (inputElement, inputErrorClass, errorClass, blockInputSelector) => {
+	const errorElement = inputElement.closest(blockInputSelector).querySelector(inputErrorClass);
 	errorElement.textContent = '';
 	errorElement.classList.toggle(errorClass, false);
 };
 
-const checkInputValidity = (formElement, inputElement, inputErrorClass, errorClass) => {
+const checkInputValidity = (formElement, inputElement, inputErrorClass, errorClass, blockInputSelector) => {
 	const isInputNotValid = !inputElement.validity.valid;
-	const errorMessage = inputElement.type === 'text' ? 'Вы пропустили это поле' : 'Введите адрес сайта';
+	const errorMessage = inputElement.validationMessage;
 	if(isInputNotValid){
-	showInputError(inputElement, errorMessage, inputErrorClass, errorClass);
+		showInputError(inputElement, errorMessage, inputErrorClass, errorClass, blockInputSelector);
 	}else{
-		hideInputError(inputElement, inputErrorClass, errorClass);
+		hideInputError(inputElement, inputErrorClass, errorClass, blockInputSelector);
 	}
 };
 
@@ -25,7 +25,7 @@ const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
 	buttonElement.classList.toggle(inactiveButtonClass, hasNotValidInput);
 };
 
-const setEventListeners = (formElement, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass) => {
+const setEventListeners = (formElement, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass, blockInputSelector) => {
 	formElement.addEventListener('submit', (event) => {
 		event.preventDefault();
 	});
@@ -33,17 +33,17 @@ const setEventListeners = (formElement, inputSelector, submitButtonSelector, ina
 	const buttonElement = formElement.querySelector(submitButtonSelector);
 	inputList.forEach((inputElement) => {
 		inputElement.addEventListener('input', () => {
-		checkInputValidity(formElement, inputElement, inputErrorClass, errorClass);
+		checkInputValidity(formElement, inputElement, inputErrorClass, errorClass, blockInputSelector);
 		toggleButtonState(inputList, buttonElement, inactiveButtonClass);
 		});
 	});
 	toggleButtonState(inputList, buttonElement, inactiveButtonClass);
 };
 
-const enableValidation = ({ formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass }) => {
+const enableValidation = ({ formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass, blockInputSelector}) => {
 	const formList = Array.from(document.querySelectorAll(formSelector));
 	formList.forEach((formElement) => {
-		setEventListeners(formElement, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass);
+		setEventListeners(formElement, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass, blockInputSelector);
 	});
 };
 
@@ -53,5 +53,6 @@ enableValidation({
 	submitButtonSelector: '.popup__submit-btn',
 	inactiveButtonClass: 'popup__submit-btn_disable',
 	inputErrorClass: '.popup__input-error',
-	errorClass: 'popup__input-error_active'
+	errorClass: 'popup__input-error_active',
+	blockInputSelector: '.popup__block-input'
 });
