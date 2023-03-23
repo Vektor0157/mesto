@@ -6,7 +6,7 @@
 	color: rgba(196,196,196,1);
 	margin: 48px 36px 37px;
 	font-weight: normal;
-	font-size: 14px;
+	font-size: 17px;
 	line-height: 22px;
 	text-align: center;
 	cursor: pointer;
@@ -16,5 +16,7 @@
 	.popup__submit-btn_disable{
 		max-width: 238px;
 		margin: 45px 22px 25px;
+		font-size: 14px;
+		line-height: 17px;
 	}
 }
