@@ -64,8 +64,7 @@ const popupOpenAddBtn = document.querySelector('.profile__add-btn');
 const popupInputTitle = document.querySelector('.popup__input_item_title');
 const popupInputLink = document.querySelector('.popup__input_item_link');
 const popupFormAddCard = document.forms["popup-form-add-btn"];
-const popupAddCardSubmitDisable = popupFormAddCard.querySelector('.popup__submit-btn_disable')
-
+const popupAddCardSubmit = popupFormAddCard.querySelector('.popup__submit-btn')
 
 
 const openPopupAddCard = () => {
@@ -83,8 +82,8 @@ function savePopupAddCard(evt){
 	popupInputTitle.value = '';
 	popupInputLink.value = '';
 	closePopup(popupAddCard);
-	popupFormAddCard.querySelector('.popup__submit-btn').classList.add('popup__submit-btn_disable');
-	popupFormAddCard.querySelector('.popup__submit-btn').disabled = true;
+	popupAddCardSubmit.classList.add('popup__submit-btn_disable');
+	popupAddCardSubmit.disabled = true;
 }
 
 
@@ -95,6 +94,7 @@ popupContainerAddCard.addEventListener('click', closePopupAddCard)
 const popupPhoto = document.querySelector('.popup_type_photo');
 const popupOpenPhoto = document.querySelector('.element__photo');
 const popupClosePhoto = document.querySelector('.popup__close_photo');
+const popupContainerPhoto = document.querySelector('.popup__container_photo')
 const popupImage = document.querySelector('.popup__image');
 const popupName = document.querySelector('.popup__name');
 const elementCard = document.querySelector('.elements');
@@ -115,6 +115,7 @@ const closePopupPhoto = (evt) =>{
 	closePopup(popupPhoto);
 };
 
+popupContainerPhoto.addEventListener('click', closePopupPhoto);
 
 
 const initialCards = [

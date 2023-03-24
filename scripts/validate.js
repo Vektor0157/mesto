@@ -1,7 +1,8 @@
 const showInputError = (inputElement, errorMessage, inputErrorClass, errorClass, blockInputSelector) => {
 	const errorElement = inputElement.closest(blockInputSelector).querySelector(inputErrorClass);
 	errorElement.textContent = errorMessage;
-	errorElement.classList.toggle(errorClass, true); };
+	errorElement.classList.toggle(errorClass, true);
+};
 
 const hideInputError = (inputElement, inputErrorClass, errorClass, blockInputSelector) => {
 	const errorElement = inputElement.closest(blockInputSelector).querySelector(inputErrorClass);
@@ -24,6 +25,7 @@ const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
 	buttonElement.disabled = hasNotValidInput;
 	buttonElement.classList.toggle(inactiveButtonClass, hasNotValidInput);
 };
+
 
 const setEventListeners = (formElement, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass, blockInputSelector) => {
 	formElement.addEventListener('submit', (event) => {
