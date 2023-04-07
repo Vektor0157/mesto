@@ -62,6 +62,7 @@ popupFormProfile.addEventListener('submit', savePopupProfile);
 //Add-card
 const popupAddCard = document.querySelector('.popup_type_add-card');
 const popupContainerAddCard = document.querySelector('.popup__container_add-card');
+const formElement = document.querySelector('.popup__form');
 const popupCloseAddCard = document.querySelector('.popup__close_add-card');
 const popupOpenAddBtn = document.querySelector('.profile__add-btn');
 const popupInputTitle = document.querySelector('.popup__input_item_title');
@@ -79,19 +80,12 @@ const closePopupAddCard = (evt) => {
 	closePopup(popupAddCard);
 }
 
-const renderCard = function (data, templateSelector) {
-	const card = new Card(data, templateSelector);
-	return card.generateCard();
-}
-
 function savePopupAddCard(evt){
 	evt.preventDefault();
 	elementCard.prepend(renderCard({name: popupInputTitle.value, link: popupInputLink.value}, '.template'));
 	popupInputTitle.value = '';
 	popupInputLink.value = '';
 	closePopup(popupAddCard);
-	popupAddCardSubmit.classList.add('popup__submit-btn_disable');
-	popupAddCardSubmit.disabled = true;
 }
 
 popupFormAddCard.addEventListener('submit', savePopupAddCard);
@@ -106,7 +100,6 @@ const popupImage = document.querySelector('.popup__image');
 const popupName = document.querySelector('.popup__name');
 const elementCard = document.querySelector('.elements');
 const elementTemplate = document.querySelector('.template');
-
 
 const openPopupPhoto = (evt) => {
 	const targetElement = evt.target;
@@ -123,19 +116,28 @@ const closePopupPhoto = (evt) =>{
 	closePopup(popupPhoto);
 };
 
-elementCard.addEventListener('click', openPopupPhoto);
+function handleCardClick(name, link) {
+	popupName.textContent = name;
+	popupImage.src = link;
+	openPopup(popupPhoto);
+}
+
+const renderCard = function (data, templateSelector) {
+	const card = new Card(data, templateSelector, handleCardClick);
+	return card.generateCard();
+}
+
 popupClosePhoto.addEventListener('click', closePopupPhoto)
 popupContainerPhoto.addEventListener('click', closePopupPhoto);
 
+
+
 initialCards.forEach((item) => {
-	const card = new Card(item, '.template');
-	const cardElement = card.generateCard();
+	const cardElement = renderCard(item, '.template');
 	elementCard.prepend(cardElement);
-	popupClosePhoto.addEventListener('click', closePopupPhoto);
-	popupContainerPhoto.addEventListener('click', closePopupPhoto);
 })
 
-const className ={
+const className = {
 	formSelector: '.popup__form',
 	inputSelector: '.popup__input',
 	submitButtonSelector: '.popup__submit-btn',
@@ -145,8 +147,10 @@ const className ={
 	blockInputSelector: '.popup__block-input'
 };
 
+const formValidator = new FormValidator(className, formElement);
 const profileFormValidity = new FormValidator(className, popupFormProfile);
 const cardFormValidity = new FormValidator(className, popupFormAddCard);
 
+formValidator.enableValidation();
 profileFormValidity.enableValidation()
 cardFormValidity.enableValidation()

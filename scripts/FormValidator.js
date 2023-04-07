@@ -21,28 +21,51 @@ export class FormValidator {
 		this._errorElement.classList.remove(this._errorClass, false);
 	}
 
-	_isValid(inputElement) {
-		const errorMessage = inputElement.validationMessage;
-		if (inputElement.validity.valid) {
-			this._hideInputError(inputElement);
-		} else {
-			this._showInputError(inputElement, errorMessage, inputElement.validationMessage);
-		}
-	}
+
 
 	_hasInvalidInput(inputList) {
 		return inputList.some(inputElement => !inputElement.validity.valid);
 	}
 
-	_toggleButtonState(inputList, buttonElement) {
+	_disableSubmitButton() {
+		this._buttonElement.classList.add(this._inactiveButtonClass);
+		this._buttonElement.disabled = true;
+	}
+	
+	_enableSubmitButton() {
+		this._buttonElement.classList.remove(this._inactiveButtonClass);
+		this._buttonElement.disabled = false;
+	}
+
+	_toggleButtonState(inputList) {
 		this._hasNotValidInput = this._hasInvalidInput(inputList);
-		this._buttonElement.disabled = this._hasNotValidInput;
-		this._buttonElement.classList.toggle(this._inactiveButtonClass, this._hasNotValidInput);
+		if (!this._hasNotValidInput) {
+			this._enableSubmitButton();
+		} else {
+			this._disableSubmitButton();
+		}
+	}
+
+	_isValid(inputElement) {
+		const errorMessage = inputElement.validationMessage;
+		if (inputElement.validity.valid) {
+			this._hideInputError(inputElement);
+		} else {
+		this._showInputError(inputElement, errorMessage, inputElement.validationMessage);
+		}
+		this._toggleButtonState(this._inputList);
+	}
+
+	_clearErrors() {
+		this._inputList.forEach(inputElement => {
+			this._hideInputError(inputElement);
+		});
 	}
 
 	_setEventListener() {
 		this._formElement.addEventListener('submit', (event) => {
 			event.preventDefault();
+			this._disableSubmitButton();
 		});
 		this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
 		this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
@@ -53,10 +76,8 @@ export class FormValidator {
 			});
 		});
 		this._formElement.addEventListener('reset', () => {
-			this._inputList.forEach(inputElement => {
-			this._hideInputError(inputElement);
-			this._toggleButtonState(this._inputList, this._buttonElement);
-			});
+			this._clearErrors();
+			this._toggleButtonState(this._inputList);
 		});
 		this._toggleButtonState(this._inputList, this._buttonElement);
 	}
