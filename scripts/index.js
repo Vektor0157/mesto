@@ -1,3 +1,6 @@
+import {Card} from './Card.js';
+import {FormValidator} from './FormValidator.js';
+import {initialCards} from './InitialCards.js';
 //Profile
 const popupOpenProfileBtn = document.querySelector('.profile__btn');
 const popupProfile = document.querySelector('.popup_type_profile');
@@ -76,16 +79,20 @@ const closePopupAddCard = (evt) => {
 	closePopup(popupAddCard);
 }
 
+const renderCard = function (data, templateSelector) {
+	const card = new Card(data, templateSelector);
+	return card.generateCard();
+}
+
 function savePopupAddCard(evt){
 	evt.preventDefault();
-	elementCard.prepend(getItem({name: popupInputTitle.value, link: popupInputLink.value}));
+	elementCard.prepend(renderCard({name: popupInputTitle.value, link: popupInputLink.value}, '.template'));
 	popupInputTitle.value = '';
 	popupInputLink.value = '';
 	closePopup(popupAddCard);
 	popupAddCardSubmit.classList.add('popup__submit-btn_disable');
 	popupAddCardSubmit.disabled = true;
 }
-
 
 popupFormAddCard.addEventListener('submit', savePopupAddCard);
 popupOpenAddBtn.addEventListener('click', openPopupAddCard);
@@ -100,6 +107,7 @@ const popupName = document.querySelector('.popup__name');
 const elementCard = document.querySelector('.elements');
 const elementTemplate = document.querySelector('.template');
 
+
 const openPopupPhoto = (evt) => {
 	const targetElement = evt.target;
 	const targetPhoto = targetElement.closest('.element__photo');
@@ -107,7 +115,7 @@ const openPopupPhoto = (evt) => {
 	popupImage.src = targetPhoto.src;
 	popupImage.alt = targetPhoto.alt;
 	popupName.textContent = targetTitle.textContent;
-	openPopup(popupPhoto)
+	openPopup(popupPhoto);
 };
 
 const closePopupPhoto = (evt) =>{
@@ -115,64 +123,30 @@ const closePopupPhoto = (evt) =>{
 	closePopup(popupPhoto);
 };
 
+elementCard.addEventListener('click', openPopupPhoto);
+popupClosePhoto.addEventListener('click', closePopupPhoto)
 popupContainerPhoto.addEventListener('click', closePopupPhoto);
 
+initialCards.forEach((item) => {
+	const card = new Card(item, '.template');
+	const cardElement = card.generateCard();
+	elementCard.prepend(cardElement);
+	popupClosePhoto.addEventListener('click', closePopupPhoto);
+	popupContainerPhoto.addEventListener('click', closePopupPhoto);
+})
 
-const initialCards = [
-	{
-		name: 'Древний город Петра',
-		link: 'https://images.unsplash.com/photo-1579208679245-1636894560fe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=686&q=80'
-	},
-	{
-		name: 'Храмы Ангкора',
-		link: 'https://images.unsplash.com/photo-1650696322307-4cc9ecf4ebe5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=715&q=80'
-	},
-	{
-		name: 'Озеро Байкал',
-		link: 'https://images.unsplash.com/photo-1551845041-73527e65adc0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=685&q=80'
-	},
-	{
-		name: 'Рисовые террасы Му Кан Чай',
-		link: 'https://images.unsplash.com/photo-1606801868003-de8a28651af9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=627&q=80'
-	},
-	{
-		name: 'Скала Язык Тролля',
-		link: 'https://images.unsplash.com/photo-1566230724840-0fe03c62884d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
-	},
-	{
-		name: 'Национальный парк Йеллоустон',
-		link: 'https://images.unsplash.com/photo-1580501402975-45081e052155?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
-	}
-];
-
-function deleteItem(evt){
-	const targetElement = evt.target;
-	const targetItem = targetElement.closest('.element');
-	targetItem.remove();
+const className ={
+	formSelector: '.popup__form',
+	inputSelector: '.popup__input',
+	submitButtonSelector: '.popup__submit-btn',
+	inactiveButtonClass: 'popup__submit-btn_disable',
+	inputErrorClass: '.popup__input-error',
+	errorClass: 'popup__input-error_active',
+	blockInputSelector: '.popup__block-input'
 };
 
-function toggleLike(evt){
-	evt.target.classList.toggle('element__like_active');
-};
+const profileFormValidity = new FormValidator(className, popupFormProfile);
+const cardFormValidity = new FormValidator(className, popupFormAddCard);
 
-function getItem(item){
-	const newItem = elementTemplate.content.cloneNode(true);
-	const elemTitle = newItem.querySelector('.element__title');
-	elemTitle.textContent = item.name;
-	const elemPhoto = newItem.querySelector('.element__photo');
-	elemPhoto.src = item.link;
-	elemPhoto.alt = item.name;
-	elemPhoto.addEventListener('click', openPopupPhoto);
-	const elemDelete = newItem.querySelector('.element__delete');
-	elemDelete.addEventListener('click', deleteItem);
-	const elemLike = newItem.querySelector('.element__like');
-	elemLike.addEventListener('click', toggleLike);
-	return newItem;
-};
-
-function renderElements (){
-	const addElement = initialCards.map(getItem);
-	elementCard.append(...addElement);
-};
-
-renderElements();
+profileFormValidity.enableValidation()
+cardFormValidity.enableValidation()
