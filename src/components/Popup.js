@@ -22,12 +22,12 @@ export default class Popup {
 
 	setEventListeners() {
 		this._popup.addEventListener('click', (event) => {
-		if (
-			event.target.classList.contains('popup__overlay') ||
-			event.target.classList.contains('popup__close')
-		) {
-			this.close();
-		}
+			if(event.target.classList.contains('popup__container')){
+				this.close(event.target)
+			}
+			if(event.target.classList.contains('popup__close')){
+				this.close()
+			}
 		});
 	}
 }

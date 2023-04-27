@@ -24,3 +24,14 @@ export const initialCards = [
 		link: 'https://images.unsplash.com/photo-1580501402975-45081e052155?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
 	}
 ];
+
+export const className = {
+	formSelector: '.popup__form',
+	inputSelector: '.popup__input',
+	submitButtonSelector: '.popup__submit-btn',
+	inactiveButtonClass: 'popup__submit-btn_disable',
+	inputErrorClass: 'popup__input-error',
+	errorClass: 'popup__input-error_active',
+	blockInputSelector: '.popup__block-input'
+};
+

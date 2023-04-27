@@ -30,12 +30,4 @@ export class PopupWithForm extends Popup {
 		super.close();
 		this._form.reset();
 	}
-
-	setSubmitButtonState(isActive) {
-		if (isActive) {
-			this._submitButton.removeAttribute('disabled');
-		} else {
-			this._submitButton.setAttribute('disabled', true);
-		}
-	}
 }
