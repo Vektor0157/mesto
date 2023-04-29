@@ -34,4 +34,3 @@ export const className = {
 	errorClass: 'popup__input-error_active',
 	blockInputSelector: '.popup__block-input'
 };
-

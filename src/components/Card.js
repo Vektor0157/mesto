@@ -11,6 +11,11 @@ export class Card {
 		this._elemLike = this._newElement.querySelector('.element__like')
 	}
 
+	_getTemplate() {
+		const cardElement = this._newElement;
+		return cardElement
+	}
+
 	_handleDeleteClick() {
 		this._newElement.remove();
 	}
@@ -18,7 +23,7 @@ export class Card {
 	_handleLikeClick() {
 		this._elemLike.classList.toggle('element__like_active');
 	}
-
+	
 	_setEventListeners() {
 		this._elemPhoto.addEventListener('click', () => {
 			this._handleCardClick({name: this._name, link: this._link});
