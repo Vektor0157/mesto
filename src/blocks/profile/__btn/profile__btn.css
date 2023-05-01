@@ -1,7 +1,7 @@
 .profile__btn{
 	width: 24px;
 	height: 24px;
-	margin: 0 0 10px 18px;
+	margin: 14px 0 0 18px;
 	padding: 0;
 	cursor: pointer;
 	border: 1px solid #fff;
@@ -10,6 +10,7 @@
 	background-repeat: no-repeat;
 	background-color: #000;
 	transition: opacity 0.5s ease-in-out;
+	grid-area: 1 / 2 / 2 / 3;
 }
 .profile__btn:hover{
 	opacity: 0.6;
@@ -19,7 +20,7 @@
 	.profile__btn{
 		width: 18px;
 		height: 18px;
-		margin: 0 0 10px 10px;
+		margin: 8px 0 0 10px;
 		background-image: url(../../../images/edit-phone.svg);
 	}
 }

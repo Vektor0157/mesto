@@ -32,10 +32,6 @@ const formProfileEdit = new PopupWithForm({
 	}
 }, '.popup_type_profile');
 
-popupFormProfile.addEventListener('submit', (evt) => {
-	evt.preventDefault();
-});
-
 popupOpenProfileBtn.addEventListener('click', () => {
 	const profileInfo = userInfo.getUserInfo();
 	userInputName.value = profileInfo.name;
@@ -65,10 +61,6 @@ const formAddCard = new PopupWithForm({
 	}
 }, '.popup_type_add-card');
 
-popupFormAddCard.addEventListener('submit', (evt) => {
-	evt.preventDefault();
-});
-
 function createCard(item) {
 	const card = new Card(item, '.template', handleCardClick);
 	return card.generateCard();
@@ -84,11 +76,9 @@ popupOpenAddBtn.addEventListener('click', () => {
 	formAddCard.open();
 });
 
-const formValidator = new FormValidator(className, formElement);
 const profileFormValidity = new FormValidator(className, popupFormProfile);
 const cardFormValidity = new FormValidator(className, popupFormAddCard);
 
-formValidator.enableValidation();
 formProfileEdit.setEventListeners();
 formAddCard.setEventListeners();
 profileFormValidity.enableValidation();
