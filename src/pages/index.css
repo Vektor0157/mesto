@@ -4,7 +4,7 @@
 @import url('../blocks/header/header.css');
 @import url('../blocks/header/__logo/header__logo.css');
 @import url('../blocks/profile/profile.css');
-@import url('../blocks/profile/__place/_avatar/profile__place_avatar.css');
+@import url('../blocks/profile/__place/profile__place.css');
 @import url('../blocks/profile/__avatar/profile__avatar.css');
 @import url('../blocks/profile/__edit-avatar/profile__edit-avatar.css');
 @import url('../blocks/profile/__info/profile__info.css');
