@@ -20,7 +20,7 @@ export class PopupWithForm extends Popup {
 		return inputValues;
 	}
 
-	_setButtonName() {
+	setButtonName() {
 		this._submitBtn.textContent = this._submitBtns.initial[`${this._submitText}`];
 	}
 
@@ -40,7 +40,6 @@ export class PopupWithForm extends Popup {
 
 	openPopup() {
 		super.open();
-		this._setButtonName();
 	}
 
 	closePopup() {

@@ -42,11 +42,15 @@ export class Card {
 
 	_handleLike() {
 		if (!this._cardElement.btnLike.classList.contains('element__like_active')) {
-			this._cardElement.btnLike.classList.add('element__like_active')
-			this._handleCardLike();
+			this._cardElement.btnLike.classList.add('element__like_active');
+			this._handleCardLike()
+				.then((res) => this.setCounterOfLikes(res.likes.length))
+				.catch((err) => console.log(err));
 		} else {
-			this._cardElement.btnLike.classList.remove('element__like_active')
-			this._handleCardDislike();
+			this._cardElement.btnLike.classList.remove('element__like_active');
+			this._handleCardDislike()
+				.then((res) => this.setCounterOfLikes(res.likes.length))
+				.catch((err) => console.log(err));
 		}
 	}
 
