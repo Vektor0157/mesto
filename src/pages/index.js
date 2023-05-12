@@ -49,19 +49,25 @@ function createCard(item, templateSelector) {
 		popupWithImage.open.bind(popupWithImage),
 		{
 			handleDeleteClick: () => {
-				formPopupDelete.openPopup();
+				formPopupDelete.open();
 				cardToRemove = newCard;
 			},
 			handleCardLike: () => {
 				return api.setLike(newCard)
-					.then((res) => res)
+					.then((res) => {
+						newCard.calculatorLikes(res);
+						return res;
+					})
 					.catch((err) => {
 						console.log(err);
 					});
 			},
 			handleCardDislike: () => {
 				return api.deleteLike(newCard)
-					.then((res) => res)
+					.then((res) => {
+						newCard.calculatorLikes(res);
+						return res;
+					})
 					.catch((err) => {
 						console.log(err);
 					});
@@ -90,10 +96,10 @@ const formProfileEdit = new PopupWithForm({
 		api.setUserInfo(formValues)
 			.then((updatedUser) => {
 				userInfo.setUserInfo(updatedUser);
+				formProfileEdit.closePopup();
 			})
 			.catch((err) => console.log(err))
 			.finally(() => {
-				formProfileEdit.closePopup();
 				formProfileEdit.setButtonName();
 			});
 	},
@@ -105,7 +111,10 @@ function getAvatar(formValues) {
 			userInfo.setUserInfo(getData);
 			formPopupAvatar.closePopup();
 		})
-		.catch((err) => console.log(err));
+		.catch((err) => console.log(err))
+		.finally(() => {
+			formPopupAvatar.setButtonName();
+	});
 }
 
 const formPopupAvatar = new PopupWithForm({
@@ -118,9 +127,6 @@ const formPopupAvatar = new PopupWithForm({
 			getAvatar(formValues);
 		})
 		.catch(() => console.log(err))
-		.finally(() => {
-			formPopupAvatar.setButtonName();
-		});
 	},
 });
 
@@ -148,7 +154,10 @@ function addCardApi(formValues) {
 			cardSection.setItem(generatedCard);
 			formAddCard.closePopup();
 		})
-		.catch((err) => console.log(err));
+		.catch((err) => console.log(err))
+		.finally(() => {
+			formAddCard.setButtonName();
+		});
 }
 
 const formAddCard = new PopupWithForm({
@@ -161,10 +170,7 @@ const formAddCard = new PopupWithForm({
 				addCardApi(formValues);
 			})
 			.catch(() => console.log('Ошибка адреса'))
-			.finally(() => {
-				formAddCard.setButtonName();
-			});
-	},
+	}
 });
 
 const formPopupDelete = new PopupWithForm({
@@ -175,10 +181,10 @@ const formPopupDelete = new PopupWithForm({
 		api.deleteCard(cardToRemove)
 			.then(() => {
 				cardToRemove.deleteCard();
+				formPopupDelete.closePopup();
 			})
 			.catch((err) => console.log(err))
 			.finally(() => {
-				formPopupDelete.closePopup();
 				formPopupDelete.setButtonName();
 			});
 	},
@@ -197,16 +203,16 @@ function setPopupProfileInputs() {
 }
 
 function handleEditAvatar() {
-	formPopupAvatar.openPopup();
+	formPopupAvatar.open();
 }
 
 function handleEditProfile() {
 	setPopupProfileInputs();
-	formProfileEdit.openPopup();
+	formProfileEdit.open();
 }
 
 function handleAddCard() {
-	formAddCard.openPopup();
+	formAddCard.open();
 }
 
 popupOpenAvatar.addEventListener('click', handleEditAvatar);

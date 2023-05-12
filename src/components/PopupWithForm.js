@@ -38,10 +38,6 @@ export class PopupWithForm extends Popup {
 		this._form.addEventListener('submit', this._submit);
 	}
 
-	openPopup() {
-		super.open();
-	}
-
 	closePopup() {
 		super.close();
 		this._form.reset();
