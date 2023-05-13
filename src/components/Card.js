@@ -81,7 +81,9 @@ export class Card {
 		this._cardElement.cardImg.alt = this._name;
 		this._cardElement.cardTitle.textContent = this._name;
 		this._cardElement.likesCalculator.textContent = this._usersWhoLikes.length;
-		this._usersLikedCard();
+		if (this._usersWhoLikes.some(user => user._id === this._myId)) {
+			this._cardElement.btnLike.classList.add('element__like_active');
+		}
 		this._visibleDeleteCard();
 		this._setEventListeners();
 		return this._element;
